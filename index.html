@@ -1707,33 +1707,30 @@ nav.scrolled {
   obs.observe(hero, { attributes: true, attributeFilter: ['class'] });
 })();
 
-// Hero reveal on hover/click
+// Hero reveal — scroll, hover, touch, or auto
 (function() {
   const hero = document.getElementById('heroSection');
   let revealed = false;
 
-  hero.addEventListener('mouseenter', function() {
-    if (!revealed) {
-      revealed = true;
-      hero.classList.add('revealed');
-    }
-  });
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    hero.classList.add('revealed');
+  }
 
-  // Also trigger on click (mobile)
-  hero.addEventListener('click', function(e) {
-    if (!revealed && !e.target.closest('a')) {
-      revealed = true;
-      hero.classList.add('revealed');
-    }
-  });
+  // Desktop: hover
+  hero.addEventListener('mouseenter', reveal);
 
-  // Auto-reveal after 5 seconds if user hasn't hovered
-  setTimeout(() => {
-    if (!revealed) {
-      revealed = true;
-      hero.classList.add('revealed');
-    }
-  }, 5000);
+  // Mobile: any scroll at all reveals it
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 30) reveal();
+  }, { passive: true });
+
+  // Mobile: touch anywhere on hero
+  hero.addEventListener('touchstart', reveal, { passive: true });
+
+  // Fallback: auto-reveal after 3 seconds
+  setTimeout(reveal, 3000);
 })();
 
 // Mock chart bars

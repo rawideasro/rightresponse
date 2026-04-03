@@ -96,6 +96,9 @@ body {
   position: relative;
   z-index: 4;
   max-width: 900px;
+  width: 100%;
+  padding: 0 1rem;
+  overflow: hidden;
 }
 
 /* Badge — hidden initially, appears on reveal */
@@ -177,12 +180,14 @@ body {
 
 .hero-line-2 {
   font-family: var(--font-display);
-  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-size: clamp(2.2rem, 6vw, 6.5rem);
   font-weight: 900;
-  line-height: 1.0;
+  line-height: 1.05;
   letter-spacing: -0.03em;
   color: #fff;
   display: block;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero-line-2 .accent-word {
@@ -1134,7 +1139,7 @@ nav.scrolled {
   .report-preview { order: -1; }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .nav-links {
     display: none;
     position: fixed;
